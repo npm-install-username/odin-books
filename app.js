@@ -68,12 +68,17 @@ function showMyLibrary(myLibrary){
             noBooksFound.remove()
         }
     }
-    myLibrary.forEach(bookObject => {
+    for (const bookObject of myLibrary)  {
+        // decided to use this syntax of for loop as forEach does not allow use of continue keyword
         var displayBoxBookRow = document.createElement('div')
         displayBoxBookRow.className = "display-box-book-row"
         displayBoxBookRow.id = "display-box-book-row" + myLibrary.indexOf(bookObject)
+        var doesDisplayBoxBookRowExist = !!document.getElementById("display-box-book-row"+myLibrary.indexOf(bookObject))
+        if(doesDisplayBoxBookRowExist){
+            continue;
+        }
         displayBoxBookRow.innerText = JSON.stringify(bookObject);
         displayBox.appendChild(displayBoxBookRow)
         
-    });
+    };
 }
