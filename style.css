@@ -3,7 +3,28 @@
     padding: 0;
 }
 
+
+
 .display-box{
     background-color: gray;
     color: white;
+    text-align: center;
+}
+
+.table-header{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    color: white;
+    background-color: darkcyan;
+}
+
+.table-col{
+    border: 1px solid black;
+    
+}
+
+.display-box-book-row{
+    display: grid;
+
+    background-color: darkcyan;
 }

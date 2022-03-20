@@ -51,6 +51,44 @@ function addToBookLibrary(title, author, pageNum, read){
     showMyLibrary(myLibrary)
 };
 
+function createTable(){
+    var displayBox = document.getElementById('display-box');
+
+    var tableDiv = document.createElement('div');
+    tableDiv.className = 'table'
+    tableDiv.id = 'table'
+
+    var titleCol = document.createElement('div');
+    titleCol.id = 'title-col';
+    titleCol.className  = 'table-col'
+    titleCol.innerText = 'Title'
+
+    var authorCol = document.createElement('div');
+    authorCol.id = 'author-col';
+    authorCol.className  = 'table-col'
+    authorCol.innerText = 'Author'
+
+    var pageNumCol = document.createElement('div');
+    pageNumCol.id = 'pageNum-col';
+    pageNumCol.className  = 'table-col'
+    pageNumCol.innerText = 'No. Pages'
+
+    var readCol = document.createElement('div');
+    readCol.id = 'read-col';
+    readCol.className  = 'table-col'
+    readCol.innerText = 'Read?'
+
+    displayBox.appendChild(tableDiv)
+    var tableHeader = document.createElement('div')
+    tableHeader.className = 'table-header'
+    tableHeader.id = 'table-header'
+    tableDiv.appendChild(tableHeader)
+    tableHeader.appendChild(titleCol)
+    tableHeader.appendChild(authorCol)
+    tableHeader.appendChild(pageNumCol)
+    tableHeader.appendChild(readCol)
+}
+
 function showMyLibrary(myLibrary){
     
     var displayBox = document.getElementById('display-box');
@@ -67,18 +105,32 @@ function showMyLibrary(myLibrary){
             var noBooksFound = document.getElementById("no-books-found");
             noBooksFound.remove()
         }
+        
+        var doesTableExist = !!document.getElementById('table');
+        if(!doesTableExist){
+            createTable()
+        }
     }
     for (const bookObject of myLibrary)  {
         // decided to use this syntax of for loop as forEach does not allow use of continue keyword
-        var displayBoxBookRow = document.createElement('div')
-        displayBoxBookRow.className = "display-box-book-row"
-        displayBoxBookRow.id = "display-box-book-row" + myLibrary.indexOf(bookObject)
-        var doesDisplayBoxBookRowExist = !!document.getElementById("display-box-book-row"+myLibrary.indexOf(bookObject))
-        if(doesDisplayBoxBookRowExist){
+        
+        var tableRow = document.createElement('div');
+        var bookObjectIndex = myLibrary.indexOf(bookObject);
+        tableRow.className = "display-box-book-row"
+        tableRow.id = "display-box-book-row" + bookObjectIndex
+        tableRow.setAttribute('data-index',JSON.stringify(bookObjectIndex));
+        //console.log(`index of - ${tableRow.getAttribute('data-index',parseInt(bookObjectIndex))}`);
+
+
+        var doestableRowExist = !!document.getElementById("display-box-book-row"+bookObjectIndex)
+        if(doestableRowExist){
             continue;
         }
-        displayBoxBookRow.innerText = JSON.stringify(bookObject);
-        displayBox.appendChild(displayBoxBookRow)
+
         
+        tableRow.innerText = JSON.stringify(bookObject);
+
+        var tableDiv = document.getElementById('table')
+        tableDiv.appendChild(tableRow)
     };
 }
