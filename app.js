@@ -14,20 +14,18 @@ Book.prototype.info = function() {
 }
 
 // Setting my library object and saving to local storage and subsequently retireving (local storage requires string)
-let myLibrary = [];
-
-myLibrary = JSON.parse(localStorage.getItem("savedLibrary")) 
+myLibrary = JSON.parse(localStorage.getItem("savedLibrary")) || []
 console.log(myLibrary)
 
 
-function saveMyLibrary(data){
+function saveBookToMyLibrary(bookObject){
     let savedLibrary = []
     // Parse the serialized data back into an aray of objects
     savedLibrary = JSON.parse(localStorage.getItem('savedLibrary')) || [];
     // Push the new data (whether it be an object or anything else) onto the array
-    savedLibrary.push(data);
+    savedLibrary.push(bookObject);
     // Alert the array value
-    console.log(savedLibrary);  // Should be something like [Object array]
+    console.log(`Saved library ${savedLibrary}`);  // Should be something like ["Object" "object" etc...]
     // Re-serialize the array back into a string and store it in localStorage
     localStorage.setItem('savedLibrary', JSON.stringify(savedLibrary));
 
@@ -45,7 +43,7 @@ addBookBtn.addEventListener('click',()=>{
 function addToBookLibrary(title, author, pageNum, read){
     let newBook = new Book(title, author, pageNum, read)
     myLibrary.push(newBook);
-    saveMyLibrary(myLibrary);
+    saveBookToMyLibrary(newBook);
     console.log("A new book was added")
     console.log(myLibrary)
 }
