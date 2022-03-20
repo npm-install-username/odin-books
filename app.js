@@ -9,6 +9,7 @@ let tableRows = document.querySelectorAll(".table-row");
 console.log(tableRows)
 
 
+
 function Book(title,author,pageNum,read)  {
     this.title = title
     this.author = author
@@ -164,21 +165,70 @@ function showMyLibrary(myLibrary){
             continue;
         }
         createTableRow(myLibrary,bookObject)
-        let tableRows = document.querySelectorAll("table-row");
-
-        
-
+        let tableRows = document.querySelectorAll("table-row"); 
     };
 }
 
 function displayOptionsOnClick(tableRow){
-    tableRow.style.backgroundColor ="blue"
+    let tableRowIndex = tableRow.getAttribute('data-index');
+    let tableRowSelected = document.getElementById('table-row'+tableRowIndex)
+    console.log(tableRow)
+    tableRowSelected.classList.add('table-row-selected')
+    console.log(`Updated class on table row ${tableRowIndex}`)
+    
+    return isTableRowSelected = tableRow.classList.contains('table-row-selected')
+
 }
 
-tableRows.forEach(tableRow => {
-    tableRow.addEventListener('click',()=>{
-        displayOptionsOnClick(tableRow)
-    });
-});
+function checkTableRowIsSelected(tableRows){
+    try {
+        tableRows.forEach(tableRow => {
+            if(tableRow.classList.contains('table-row-selected')) throw BreakException
+        
 
-// To undo changes when doument clicked
+            let tableRowIndex = tableRow.getAttribute('data-index')
+            document.addEventListener('click',(e)=>{
+                if(e.target.closest('.table-row-selected')) return;
+                tableRowSelected.classList.remove('table-row-selected')
+            })
+            tableRow.addEventListener('click',()=>{
+                
+                let isTableRowSelected =  displayOptionsOnClick(tableRow)
+                console.log(isTableRowSelected)
+            });
+        })
+        
+    } catch (error) {
+        
+    }
+
+
+}
+
+
+
+
+var BreakException = {};
+try {
+    
+    tableRows.forEach(tableRow => {
+        
+        if(tableRow.classList.contains('table-row-selected')) throw BreakException
+        
+
+        let tableRowIndex = tableRow.getAttribute('data-index')
+        document.addEventListener('click',(e)=>{
+            if(e.target.closest('.table-row-selected')) return;
+            tableRowSelected.classList.remove('table-row-selected')
+        })
+        tableRow.addEventListener('click',()=>{
+            
+            let isTableRowSelected =  displayOptionsOnClick(tableRow)
+            console.log(isTableRowSelected)
+        });
+
+    });
+    
+} catch (error) {
+    if (e!== BreakException) throw e
+}

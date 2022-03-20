@@ -31,8 +31,12 @@
     background-color: darkcyan;
 }
 
-.table-row:hover{
+/* .table-row:hover{
     background-color: slateblue!important;
+} */
+
+.table-row-selected{
+    background-color: blue!important;
 }
 
 .table-cell{
