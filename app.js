@@ -1,4 +1,8 @@
 
+// initializing page
+myLibrary = JSON.parse(localStorage.getItem("savedLibrary")) || [];
+console.log(myLibrary);
+showMyLibrary(myLibrary);
 
 const addBookBtn = document.getElementById("add-book-button");
 
@@ -11,11 +15,8 @@ function Book(title,author,pageNum,read)  {
 
 Book.prototype.info = function() {
     return(`${this.title} by ${this.author}, ${this.pageNum}, ${this.read}`)
-}
+};
 
-// Setting my library object and saving to local storage and subsequently retireving (local storage requires string)
-myLibrary = JSON.parse(localStorage.getItem("savedLibrary")) || []
-console.log(myLibrary)
 
 
 function saveBookToMyLibrary(bookObject){
@@ -29,15 +30,16 @@ function saveBookToMyLibrary(bookObject){
     // Re-serialize the array back into a string and store it in localStorage
     localStorage.setItem('savedLibrary', JSON.stringify(savedLibrary));
 
-}
+};
 
 addBookBtn.addEventListener('click',()=>{
     let title = document.getElementById('title').value;
     let author = document.getElementById('author').value;
     let pageNum = document.getElementById('pageNum').value;
     let read = document.getElementById('read').checked;
+    
     addToBookLibrary(title, author, pageNum, read)
-})
+});
 
 
 function addToBookLibrary(title, author, pageNum, read){
@@ -46,4 +48,32 @@ function addToBookLibrary(title, author, pageNum, read){
     saveBookToMyLibrary(newBook);
     console.log("A new book was added")
     console.log(myLibrary)
+    showMyLibrary(myLibrary)
+};
+
+function showMyLibrary(myLibrary){
+    
+    var displayBox = document.getElementById('display-box');
+    
+    if(myLibrary.length === 0){
+        var noBooksFound = document.createElement('h2')
+        noBooksFound.id = "no-books-found"
+        noBooksFound.innerHTML = "No Books Found"
+        return displayBox.appendChild(noBooksFound)
+    } else{
+        //!! operator returns boolean value
+        var noBooksFoundExists = !!document.getElementById('no-books-found')
+        if(noBooksFoundExists){
+            var noBooksFound = document.getElementById("no-books-found");
+            noBooksFound.remove()
+        }
+    }
+    myLibrary.forEach(bookObject => {
+        var displayBoxBookRow = document.createElement('div')
+        displayBoxBookRow.className = "display-box-book-row"
+        displayBoxBookRow.id = "display-box-book-row" + myLibrary.indexOf(bookObject)
+        displayBoxBookRow.innerText = JSON.stringify(bookObject);
+        displayBox.appendChild(displayBoxBookRow)
+        
+    });
 }
