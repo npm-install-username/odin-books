@@ -16,6 +16,7 @@
     grid-template-columns: repeat(4,1fr);
     color: white;
     background-color: darkcyan;
+    font-weight: bold;
 }
 
 .table-col{
@@ -23,8 +24,14 @@
     
 }
 
-.display-box-book-row{
+.table-row{
     display: grid;
-
+    grid-template-columns: repeat(4,1fr);
+    
     background-color: darkcyan;
 }
+
+.table-cell{
+    border: 1px solid black;
+}
+
