@@ -15,7 +15,7 @@
     display: grid;
     grid-template-columns: repeat(4,1fr);
     color: white;
-    background-color: darkcyan;
+    background-color: darkslategray;
     font-weight: bold;
 }
 
@@ -29,6 +29,10 @@
     grid-template-columns: repeat(4,1fr);
     
     background-color: darkcyan;
+}
+
+.table-row:hover{
+    background-color: slateblue!important;
 }
 
 .table-cell{

@@ -5,6 +5,9 @@ console.log(myLibrary);
 showMyLibrary(myLibrary);
 
 const addBookBtn = document.getElementById("add-book-button");
+let tableRows = document.querySelectorAll(".table-row");
+console.log(tableRows)
+
 
 function Book(title,author,pageNum,read)  {
     this.title = title
@@ -161,8 +164,21 @@ function showMyLibrary(myLibrary){
             continue;
         }
         createTableRow(myLibrary,bookObject)
+        let tableRows = document.querySelectorAll("table-row");
 
         
 
     };
 }
+
+function displayOptionsOnClick(tableRow){
+    tableRow.style.backgroundColor ="blue"
+}
+
+tableRows.forEach(tableRow => {
+    tableRow.addEventListener('click',()=>{
+        displayOptionsOnClick(tableRow)
+    });
+});
+
+// To undo changes when doument clicked
