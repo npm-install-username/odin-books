@@ -211,7 +211,8 @@ function displayOptionsOnClick(tableRow){
     let tableRowSelected = document.getElementById('table-row'+tableRowIndex)
     
     tableRowSelected.classList.add('table-row-selected')
-    console.log(`Updated class on table row ${tableRowIndex}`)
+    console.log(`Updated class on table row ${tableRowIndex}`);
+    
     
 }
 

@@ -13,10 +13,12 @@
 
 
 
+
 .display-box{
     background-color: gray;
     color: white;
     text-align: center;
+    position: sticky;
 }
 
 .add-new-button-div{
@@ -47,6 +49,7 @@
     color: white;
     background-color: darkslategray;
     font-weight: bold;
+    position: sticky;
 }
 
 
@@ -64,7 +67,7 @@
 
 .table-row-selected{
     background-color: #0c4a6e!important;
-    
+    position: relative;
 }
 
 
