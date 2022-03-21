@@ -2,10 +2,10 @@
 // initializing page
 myLibrary = JSON.parse(localStorage.getItem("savedLibrary")) || [];
 console.log(myLibrary);
+let tableRows = document.querySelectorAll(".table-row");
 showMyLibrary(myLibrary);
 
 const addBookBtn = document.getElementById("add-book-button");
-let tableRows = document.querySelectorAll(".table-row");
 
 
 
@@ -131,6 +131,7 @@ function createTableRow(myLibrary, bookObject){
     if(bookObjectIndex % 2==0){
         document.getElementById(tableRow.id).style.backgroundColor="antiquewhite"
     }
+    tableRows = document.querySelectorAll('.table-row')
 }
 
 function showMyLibrary(myLibrary){
@@ -167,11 +168,13 @@ function showMyLibrary(myLibrary){
             continue;
         }
         createTableRow(myLibrary,bookObject)
-        let tableRows = document.querySelectorAll("table-row"); 
+        // do not declare tableRows using let or var keyword so as to overwrite the global variable
     };
+    
 }
 
 function displayOptionsOnClick(tableRow){
+
     let tableRowIndex = tableRow.getAttribute('data-index');
     let tableRowSelected = document.getElementById('table-row'+tableRowIndex)
     
@@ -193,17 +196,21 @@ function isATableRowSelected(tableRows){
 
 
 for (let tableRow of tableRows){
-    
+
     tableRow.addEventListener('click',()=>{
-        let tableRowSelected = document.querySelector('.table-row-selected');
+        
     
         if(isATableRowSelected(tableRows)){
-            
+            let tableRowSelected = document.querySelector('.table-row-selected');
             tableRowSelected.classList.remove('table-row-selected')
             displayOptionsOnClick(tableRow)
+            return
+            
             
         } else if(!isATableRowSelected(tableRows)){
+            
             displayOptionsOnClick(tableRow)
+            return
         }
     });
     
@@ -213,7 +220,10 @@ for (let tableRow of tableRows){
         if(isATableRowSelected(tableRows)){
             if(e.target.closest('.table-row-selected')) return;
             tableRowSelected.classList.remove('table-row-selected')
+            return
         }
 
     })
 }
+
+
