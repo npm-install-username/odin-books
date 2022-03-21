@@ -6,7 +6,9 @@ showMyLibrary(myLibrary);
 
 const addBookBtn = document.getElementById("add-book-button");
 let tableRows = document.querySelectorAll(".table-row");
-console.log(tableRows)
+
+
+
 
 
 
@@ -172,63 +174,46 @@ function showMyLibrary(myLibrary){
 function displayOptionsOnClick(tableRow){
     let tableRowIndex = tableRow.getAttribute('data-index');
     let tableRowSelected = document.getElementById('table-row'+tableRowIndex)
-    console.log(tableRow)
+    
     tableRowSelected.classList.add('table-row-selected')
     console.log(`Updated class on table row ${tableRowIndex}`)
     
-    return isTableRowSelected = tableRow.classList.contains('table-row-selected')
-
 }
 
-function checkTableRowIsSelected(tableRows){
-    try {
-        tableRows.forEach(tableRow => {
-            if(tableRow.classList.contains('table-row-selected')) throw BreakException
-        
-
-            let tableRowIndex = tableRow.getAttribute('data-index')
-            document.addEventListener('click',(e)=>{
-                if(e.target.closest('.table-row-selected')) return;
-                tableRowSelected.classList.remove('table-row-selected')
-            })
-            tableRow.addEventListener('click',()=>{
-                
-                let isTableRowSelected =  displayOptionsOnClick(tableRow)
-                console.log(isTableRowSelected)
-            });
-        })
-        
-    } catch (error) {
-        
+function isATableRowSelected(tableRows){
+    for (let tableRow of tableRows){
+         
+        if (tableRow.classList.contains('table-row-selected')){
+            return true
+        }
     }
-
-
+    return false
+    
 }
 
 
-
-
-var BreakException = {};
-try {
+for (let tableRow of tableRows){
     
-    tableRows.forEach(tableRow => {
-        
-        if(tableRow.classList.contains('table-row-selected')) throw BreakException
-        
-
-        let tableRowIndex = tableRow.getAttribute('data-index')
-        document.addEventListener('click',(e)=>{
-            if(e.target.closest('.table-row-selected')) return;
-            tableRowSelected.classList.remove('table-row-selected')
-        })
-        tableRow.addEventListener('click',()=>{
+    tableRow.addEventListener('click',()=>{
+        let tableRowSelected = document.querySelector('.table-row-selected');
+    
+        if(isATableRowSelected(tableRows)){
             
-            let isTableRowSelected =  displayOptionsOnClick(tableRow)
-            console.log(isTableRowSelected)
-        });
-
+            tableRowSelected.classList.remove('table-row-selected')
+            displayOptionsOnClick(tableRow)
+            
+        } else if(!isATableRowSelected(tableRows)){
+            displayOptionsOnClick(tableRow)
+        }
     });
     
-} catch (error) {
-    if (e!== BreakException) throw e
+    document.addEventListener('click',(e)=>{
+        let tableRowSelected = document.querySelector('.table-row-selected');
+        
+        if(isATableRowSelected(tableRows)){
+            if(e.target.closest('.table-row-selected')) return;
+            tableRowSelected.classList.remove('table-row-selected')
+        }
+
+    })
 }
