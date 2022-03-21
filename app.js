@@ -132,6 +132,37 @@ function createTableRow(myLibrary, bookObject){
         document.getElementById(tableRow.id).style.backgroundColor="antiquewhite"
     }
     tableRows = document.querySelectorAll('.table-row')
+    for (let tableRow of tableRows){
+
+        tableRow.addEventListener('click',()=>{
+            
+        
+            if(isATableRowSelected(tableRows)){
+                let tableRowSelected = document.querySelector('.table-row-selected');
+                tableRowSelected.classList.remove('table-row-selected')
+                displayOptionsOnClick(tableRow)
+                return
+                
+                
+            } else if(!isATableRowSelected(tableRows)){
+                
+                displayOptionsOnClick(tableRow)
+                return
+            }
+        });
+        
+        document.addEventListener('click',(e)=>{
+            let tableRowSelected = document.querySelector('.table-row-selected');
+            
+            if(isATableRowSelected(tableRows)){
+                if(e.target.closest('.table-row-selected')) return;
+                tableRowSelected.classList.remove('table-row-selected')
+                return
+            }
+    
+        })
+    }
+    
 }
 
 function showMyLibrary(myLibrary){
