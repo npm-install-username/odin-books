@@ -129,9 +129,10 @@ function createTableRow(myLibrary, bookObject){
     tableRow.appendChild(tableCellRead)
 
     if(bookObjectIndex % 2==0){
-        document.getElementById(tableRow.id).style.backgroundColor="antiquewhite"
+        document.getElementById(tableRow.id).style.backgroundColor="#bae6fd"
     }
     tableRows = document.querySelectorAll('.table-row')
+    // Add event listener to new row
     for (let tableRow of tableRows){
 
         tableRow.addEventListener('click',()=>{

@@ -1,6 +1,14 @@
 *{
     margin: 0;
     padding: 0;
+    /* remove text selection */
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
 }
 
 
@@ -11,6 +19,28 @@
     text-align: center;
 }
 
+.add-new-button-div{
+    text-align: center;
+    justify-content: center;
+}
+
+.add-new-button-div > button{
+    background-color: #38bdf8;
+    border-style: none;
+}
+
+.add-new-button-div > button:hover{
+    background-color: #0c4a6e;
+}
+
+.add-new-button-div > button:focus{
+    background-color: #0c4a6e;
+}
+
+
+
+
+
 .table-header{
     display: grid;
     grid-template-columns: repeat(4,1fr);
@@ -19,16 +49,13 @@
     font-weight: bold;
 }
 
-.table-col{
-    border: 1px solid black;
-    
-}
+
 
 .table-row{
     display: grid;
     grid-template-columns: repeat(4,1fr);
-    
-    background-color: darkcyan;
+    font-weight: bold;
+    background-color: #38bdf8;
 }
 
 /* .table-row:hover{
@@ -36,10 +63,10 @@
 } */
 
 .table-row-selected{
-    background-color: blue!important;
+    background-color: #0c4a6e!important;
+    
 }
 
-.table-cell{
-    border: 1px solid black;
-}
 
+
+ 
